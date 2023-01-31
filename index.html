@@ -90,15 +90,10 @@
                               <span class="help-block" data-valmsg-for="x_zip" data-valmsg-replace="true"></span>
                           </div>
                           <div>
-                              <button id="payment-button" class="btn btn-lg btn-success btn-block" onclick="verifyPayment()">
-                                  <i class="fa fa-lock fa-lg"></i>&nbsp;
-                                  <span id="total">Pay $0</span>
-                                  <span id="payment-button-sending" style="display:none;">Sending…</span>
-                              </button>
                           </div>
                       </form>
                       <hr/>
-                      <button id="payment-button" class="btn btn-lg btn-success btn-block" onclick="verifyPayment()">Payment</button>
+                      <button id="total" class="btn btn-lg btn-success btn-block" onclick="verifyPayment()">Pay $0</button>
                   </div>
               </div>
           </div>
@@ -136,13 +131,14 @@
           postalCode : '',
           total: '0'
         }
-
+        console.log(details)
         details.cardName = $('#cc-name').val()
         details.cardNum = $('#cc-number').val()
         details.total = $('#totalAmount').val()
         details.expiry = $('#cc-exp').val()
         details.cvv = $('#x_card_code').val()
         details.postalCode = $('#x_zip').val()
+        console.log(details)
 
 fetch('https://2t6vcm5h11.execute-api.us-west-2.amazonaws.com/Test/verifypayment', {
     method: 'POST',
