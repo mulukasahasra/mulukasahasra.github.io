@@ -30,7 +30,7 @@
                           <h2 class="text-center">Pay Invoice</h2>
                       </div>
                       <hr>
-                      <form>
+                      <!-- <form> -->
                           <input type="hidden" id="x_first_name" name="x_first_name" value="">
                           <input type="hidden" id="x_last_name" name="x_last_name" value="">
                           <input type="hidden" id="x_card_num" name="x_card_num" value="">
@@ -91,7 +91,7 @@
                           </div>
                           <div>
                           </div>
-                      </form>
+                      <!-- </form> -->
                       <hr/>
                       <button id="total" class="btn btn-lg btn-success btn-block" onclick="verifyPayment()">Pay $0</button>
                   </div>
@@ -139,17 +139,36 @@
         details.cvv = $('#x_card_code').val()
         details.postalCode = $('#x_zip').val()
         console.log(details)
-
-fetch('https://2t6vcm5h11.execute-api.us-west-2.amazonaws.com/Test/verifypayment', {
-    method: 'POST',
-    headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json'
-    },
-    body: JSON.stringify(details)
-})
-.then(response => response.json())
-.then(response => alert(response))
+        var isValid = true
+        for(const detail in details){
+            if(details[detail].length < 1){
+                alert("Please enter valid "+ detail);
+                isValid = false;
+                return null;
+            }
+        }
+        if(details.cardNum < 16){
+            alert("Please enter a valid card number. Dont Use Spaces or Hypens(-)");
+            isValid = false;
+            return null;
+        }
+        if(details.postalCode < 5){
+            alert("Please enter a valid 5 digit postal Code");
+            isValid = false;
+            return null;
+        }        
+        if(isValid){
+        fetch('https://w8k5gt18se.execute-api.us-east-1.amazonaws.com/Production/verifypayment', {
+            method: 'POST',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(details)
+        })
+        .then(response => response.json())
+        .then(response => alert(response))
+     }
     }
     </script>
   </body>
