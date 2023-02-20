@@ -21,11 +21,7 @@
       <br/>
       <div class="col-12 col-sm-8 col-md-6 mx-auto">
       <ul class="list-group" id="transactions">
-        <!-- <li class="list-group-item">  c6294858-9c25-11ed-a8fc-0242ac120002</li>
-        <li class="list-group-item">c6294d1c-9c25-11ed-a8fc-0242ac120002 </li>
-        <li class="list-group-item">c6294e8e-9c25-11ed-a8fc-0242ac120002</li>
-        <li class="list-group-item">c62950aa-9c25-11ed-a8fc-0242ac120002</li>
-        <li class="list-group-item">c62951ea-9c25-11ed-a8fc-0242ac120002</li> -->
+        
       </ul>
     </div>
 
@@ -38,15 +34,13 @@
     <script>
         var authcodes = []
         function onLoad(){
-            fetch('https://2t6vcm5h11.execute-api.us-west-2.amazonaws.com/Test/')
+            fetch('https://w8k5gt18se.execute-api.us-east-1.amazonaws.com/Production/gettransactions')
             .then((response) => response.json())
             .then((data) => data.map(code => {
                 console.log(code)
             $('#transactions').append('<li class="list-group-item">' + code.authCode + ' <span class="badge badge-primary badge-pill">' + code.totalAmount + '$</span>  <span class="badge badge-primary badge-pill">' + code.cardName + '</span> <span class="badge badge-primary badge-pill">' + code.transactionTime + '</span> </li>')
             }) );
         }
-
-
     </script>
 
   </body>
