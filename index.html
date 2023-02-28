@@ -167,7 +167,7 @@
             body: JSON.stringify(details)
         })
         .then(response => response.json())
-        .then(response => alert(response))
+        .then(response => alert(JSON.stringify(response.isAuthorized)))
      }
     }
     </script>
